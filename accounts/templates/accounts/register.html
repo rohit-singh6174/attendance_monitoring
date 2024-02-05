@@ -1,0 +1,81 @@
+{% extends "accounts/accountbase.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body py-5 px-md-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div id="message" class="container">
+    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error: {% endif %}
+        {{ message }}
+    </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <h2 class="text-center">Account Registeration </h2> <br>
+    <form method="POST" action="{% url "register" %}">
+      {% csrf_token %}
+      <!-- 2 column grid layout with text inputs for the first and last names -->
+      <div class="row">
+        <div class="col-md-6 mb-1">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">First name</label>
+            {{ form.first_name }}
+          </div>
+        </div>
+        <div class="col-md-6 mb-1">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">Last name</label>
+            {{ form.last_name }}
+             <p class="text-danger"></p>
+        </div>
+        </div>
+      </div>
+
+
+      <!-- Email input -->
+      <div class="form-outline mb-1">
+        <label class="form-label" for="form3Example3">Email address</label>
+        {{form.email}}
+        <p class="text-danger"></p>
+      </div>
+
+      <!-- Phone input -->
+      <div class="form-outline mb-1">
+        <label class="form-label" for="form3Example3">Phone number</label>
+        {{form.phone_number}}
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-1">
+        <label class="form-label" for="form3Example4">Password</label>
+        {{ form.password }}
+      </div>
+
+       <!-- Re Password input -->
+       <div class="form-outline mb-1">
+        <label class="form-label" for="form3Example4">Confirm Password</label>
+        {{form.confirm_password}}
+      </div><br>
+
+      <!-- Submit button -->
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Sign up</button>
+      <div>
+     
+      <p> {{ form.non_field_errors }} </p>
+      
+
+      <!-- Register buttons -->
+      <div class="text-center">
+        <a href="{% url "login" %}"><p>Already had an account</p>
+        </a>
+      </div>
+    </form>
+  </div>
+</div> <!--card end-->
+
+{% endblock%}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    {% include  'includes/alert.html' %}
+    <h1 class="mt-4">Students</h1>
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">List</li>
+    </ol>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            All Enrolled Students
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Rollno</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                        <th>Admission Year</th>
+                        <th>Div</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for student in students %}
+                    <tr>
+                        <td>{{student.stud_roll_no}}</td>
+                        <td>{{student.stud_name}}</td>
+                        <td>{{student.stud_email}}</td>
+                        <td>{{student.branch}}</td>
+                        <td>{{student.year_of_admission}}</td>
+                        <td>{{student.stud_div}}</td>
+                        <td> 
+                            <a class="btn btn-primary" href="{% url "student_profile" stud_roll_no=student.stud_roll_no %}" role="button">Link</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+    
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

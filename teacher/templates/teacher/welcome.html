@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      
+        <title>Welcome</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        {% block css_files %} 
+       
+        <!-- Favicons -->
+        <link href="{% static "img/teacher/iconlogo.png" %}" rel="icon">
+       
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="{% static "vendor/teacher/aos/aos.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/bootstrap-icons/bootstrap-icons.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/boxicons/css/boxicons.min.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/glightbox/css/glightbox.min.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/remixicon/remixicon.css" %}" rel="stylesheet">
+        <link href="{% static "vendor/teacher/swiper/swiper-bundle.min.css" %}" rel="stylesheet">
+
+        <!-- Template Main CSS File -->
+        <link href="{% static "css/teacher/style.css" %}" rel="stylesheet">
+        {% endblock%}
+
+    </head>
+    <body>
+       <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top ">
+        <div class="container d-flex align-items-center">
+
+        <h1 class="logo me-auto"><a href="#">MY Class</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+            <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="#services">Services</a></li>
+       
+            <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          
+            <li><a class="nav-link scrollto" href="{% url "register" %}">Sign up</a></li>
+            <li><a class="getstarted scrollto" href="{% url "login" %}">Sign in</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+            <h1>Welcome to Revolutionizing Attendance Tracking: </h1>
+            <h2>The Future of Management Systems</h2>
+         
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+          <img src="{% static "img/teacher/hero-img.png" %} " class="img-fluid animated" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+ {% block content %}
+<!-- ======= About Us Section ======= -->
+ <section id="about" class="about"> 
+    {% include "teacher/includes/aboutus.html" %}
+ </section>
+<!-- End About us Section -->
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+    {% include "teacher/includes/services.html" %}
+</section>
+<!-- End Services Section -->
+
+<!-- ======= Skills Section ======= -->
+   <section id="skills" class="skills">
+    {% include "teacher/includes/skills.html" %}
+   </section>
+ <!-- End Skills Section -->
+
+ <!-- ======= Team Section ======= -->
+ <section id="team" class="team section-bg">
+    {% include "teacher/includes/teams.html" %}
+ </section><!-- End Team Section -->
+
+
+   <!-- ======= Footer ======= -->
+   <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>MyClass</h3>
+            <p>
+              This is BE Major Project <br>
+              Vidyalankar Institute of Technology<br>
+              Wadala, Mumbai<br><br>
+              <strong>Developer:</strong><br>
+              Rohit Singh <br>
+              Rohan Shahabaje <br>
+              Nikhil Shikare <br>
+              
+            </p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Social Networks</h4>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+</footer><!-- End Footer -->
+ 
+{%endblock%}
+
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static "vendor/teacher/aos/aos.js" %} "></script>
+  <script src="{% static "vendor/teacher/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "vendor/teacher/glightbox/js/glightbox.min.js" %}"></script>
+  <script src="{% static "vendor/teacher/isotope-layout/isotope.pkgd.min.js" %}"></script>
+  <script src="{% static "vendor/teacher/swiper/swiper-bundle.min.js" %}"></script>
+  <script src="{% static "vendor/teacher/waypoints/noframework.waypoints.js" %}"></script>
+  <script src="{% static "vendor/teacher/php-email-form/validate.js" %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static "js/teacher/main.js" %}"></script>
+
+    </body>
+</html>

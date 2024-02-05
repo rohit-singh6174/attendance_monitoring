@@ -1,0 +1,47 @@
+{% extends "accounts/accountbase.html" %}
+{% load static %}
+
+{% block content %}
+            <div class="card">
+              <div class="card-body py-5 px-md-5">
+                <form  method="post">
+                    {% csrf_token %}
+                  <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <h1> Sign in</h1><br>
+  
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3">Email</label>
+                    {{form.email}}
+                    
+                  <!--  <input type="text" id="form3Example3" class="form-control" />-->  
+                  </div>
+  
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example4">Password</label>
+                    {{form.password}}
+                    
+                  <!--  <input type="password" id="form3Example4" class="form-control" />-->
+                
+                  </div>
+  
+               
+  
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign in
+                  </button>
+                  <br>
+               
+                  <div class="text-center">
+                    <a href="{% url "register" %}"><p>I don't have an account</p>
+                    </a>
+                  </div>
+                
+                
+                </form>
+              </div>
+            </div>
+{% endblock %}
+        

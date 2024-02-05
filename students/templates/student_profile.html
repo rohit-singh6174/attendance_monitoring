@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+  {% include  'includes/alert.html' %}
+    <h1 class="py-2">Edit Student</h1>
+    
+
+    <div class="row">
+        <div class="col-xl-7">
+            
+           <!--form-->
+           <div class="card-body py-2 px-md-2">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Rollno</label>
+                    <input type="text" id="form3Example1" class="form-control" name="stud_roll_no"  value="{{student.stud_roll_no}}" />
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Name</label>
+                    <input type="text" id="form3Example1" class="form-control"  name="stud_name"  value="{{student.stud_name}}"  />
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Email</label>
+                    <input type="text" id="form3Example1" class="form-control" name="stud_email"  value="{{student.stud_email}}" />
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Phone Number</label>
+                    <input type="text" id="form3Example1" class="form-control" name="stud_phone"  value="{{student.stud_phone}}" />
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Admission Year</label>
+                    <input type="text" id="form3Example1" class="form-control" name="year_of_admission"  value="{{student.year_of_admission}}"  />
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Div</label>
+                    <input type="text" id="form3Example1" class="form-control" name="stud_div"  value="{{student.stud_div}}" />
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Branch</label>
+                    <input type="text" id="form3Example1" class="form-control" name="branch"  value="{{student.branch}}" />
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Finger Id</label>
+                    <input type="text" id="form3Example1" class="form-control" name="finger_id"  value="{{student.finger_id}}" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                   
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <button type="submit" class="btn btn-primary">
+                     Edit
+                    </button>
+                  </div>
+                </div>
+              </div>
+             
+            </form>
+          </div>
+
+           <!--form end-->
+
+
+        </div>
+        <div class="col-xl-5">
+            <div class="p-5">
+              <img src="{{ student.stud_profile.url }}" class="img-fluid" alt="Responsive image" style="border-radius: 50%;">
+            </div>
+        </div>
+</div>
+
+{% endblock %}
