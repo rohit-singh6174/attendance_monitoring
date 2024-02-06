@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+  {% include  'includes/alert.html' %}
+    <h1 class="py-2">Create Session</h1>
+  
+    <div class="row">
+        <div class="col-xl-7">
+            
+           <!--form-->
+           <div class="card-body py-2 px-md-2">
+            <form method="post" action="{% url "create_session" %}">
+                {% csrf_token %}
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Admission Year</label>
+                    <input type="text" name="admission_year" id="admission_year" class="form-control" />
+                  
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Subject Name</label>
+                    <input type="text" name="subject_name" id="subject_name" class="form-control" />
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Div</label>
+                    <input type="text" name="div" id="div" class="form-control" />
+                   <!--{{form.stud_email}}-->
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Machine Id</label>
+                   
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Branch</label>
+                    <input type="text" name="branch" id="branch" class="form-control" />
+                    
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <br>
+                    <button type="submit" class="btn btn-primary">
+                        Create Session
+                      </button>
+
+                  </div>
+                </div>
+              </div>
+
+
+            
+             
+            </form>
+          </div>
+
+           <!--form end-->
+
+
+        </div>
+        <div class="col-xl-5">
+            <div class="p-5">
+                <img src="{% static "img/enroll.png" %}" class="img-fluid" alt="Responsive image">
+            </div>
+        </div>
+</div>
+
+{% endblock %}
