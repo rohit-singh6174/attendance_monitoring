@@ -4,9 +4,9 @@ from django.contrib import admin
 from lec_session.models import Lecture_Session
 # Register your models here.
 
-# class Lecture_SessionAdmin(admin.ModelAdmin):
-#     list_filter=("subject_name","email","branch","date")
-#     list_display=("session_id","subject_name","email","branch","date","start_time","end_time")
+class Lecture_SessionAdmin(admin.ModelAdmin):
+    list_filter=("subject_name","is_active","branch","date")
+    list_display=("session_id","subject_name","branch","date","is_active")
    
     
-admin.site.register(Lecture_Session)
+admin.site.register(Lecture_Session,Lecture_SessionAdmin)

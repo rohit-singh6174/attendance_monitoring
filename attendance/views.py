@@ -28,7 +28,9 @@ class Atten:
                         student_roll_no=student_data[0]['stud_roll_no']
                         print(f'{student_name}:{student_roll_no}')
                         #Check is session is active for that year and branch
+
                         if Lecture_Session.objects.filter(machine_id=machine_id).filter(is_active=True):
+                            print(session_id)
                             attendance_obj= Attendance_table.objects.create(stud_name=student_name,roll_no=student_roll_no,sem_type=True,session_id=session_id,is_present=True,date=datetime.now().date())
                             attendance_obj.save()
 

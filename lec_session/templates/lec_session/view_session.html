@@ -19,7 +19,15 @@
                         <!-- Content for the first half -->
                         <h5 class="card-title">{{session.subject_name}}</h5>
                         <p class="card-text">Date: {{session.date}} | Start Time:  {{session.start_time}} | End Date</p>
-                        <p class="card-text">{{session.is_active}}</p>
+                        
+                        {% if session.is_active %}
+                                <!-- Content to display if boolean_value is True -->
+                                <p>Session is Active</p>
+                            {% else %}
+                                <!-- Content to display if boolean_value is False -->
+                                <p>Session Ended</p>
+                        {% endif %}
+                     
                     </div>
                     <!-- Second half -->
                     <div class="col-6 d-flex flex-row-reverse">

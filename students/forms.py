@@ -2,9 +2,18 @@ from django import forms
 from .models import Student
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
+department=( 
+    ("IT", "Information Technology"), 
+    ("CO", "Computer Engineering"), 
+    ("EXTC", "Electronics and telecommunication engineering"),
+    ("ETRX", "Electronics Engineering"), 
+    ("BIO", "Biomedical engineering"), 
+) 
+
 class EnrollStudentForm(forms.ModelForm):
-    
+   
     # stud_phone = forms.CharField(max_length=10)
+    branch=forms.ChoiceField(choices=department) 
     class Meta:
         model = Student
         fields = ['stud_roll_no','stud_name','stud_phone','stud_email','year_of_admission','stud_div','branch','finger_id','stud_profile']

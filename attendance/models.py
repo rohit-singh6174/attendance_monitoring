@@ -8,7 +8,7 @@ from students.models import Student
 # Create your models here.
 class Machine(models.Model):
     machine_id = models.CharField(max_length=250,unique=True)
-    branch=models.ForeignKey(Department, on_delete=models.CASCADE)
+    branch=models.CharField(max_length=250)
     admission_year = models.PositiveIntegerField(
             validators=[
                 MinValueValidator(1900), 
@@ -20,12 +20,13 @@ class Machine(models.Model):
 
 
 class Attendance_table(models.Model):
-    date = models.DateField(blank=True , null=True)
-    is_present  = models.BooleanField(blank=False , default=False)
-    roll_no = models.CharField(max_length=250,unique=True)
-    session_id= models.CharField(null=False ,max_length=20,primary_key=True)
-    stud_name=models.CharField(max_length=100)
-    sem_type= models.BooleanField(blank=False , default=False)
+    id = models.AutoField(primary_key=True)
+    date = models.DateField(blank=True)
+    is_present = models.BooleanField(default=False)
+    roll_no = models.CharField(max_length=250, blank=True, null=True)
+    session_id = models.CharField(max_length=250, blank=True, null=True)
+    stud_name = models.CharField(max_length=180, blank=True)
+    sem_type = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.stud_name} , {self.session_id}"

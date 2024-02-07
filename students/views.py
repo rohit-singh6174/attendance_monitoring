@@ -30,6 +30,7 @@ def enroll_student(request):
              branch=form.cleaned_data['branch']
              finger_id=form.cleaned_data['finger_id']
              stud_profile=form.cleaned_data['stud_profile']
+
              
              enrolled= Student(stud_roll_no=stud_roll_no,stud_name=stud_name,stud_phone=stud_phone,stud_email=stud_email,stud_div=stud_div,branch=branch,stud_profile=stud_profile,finger_id=finger_id,year_of_admission=year_of_admission)
              enrolled.save()

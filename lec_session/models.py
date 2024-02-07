@@ -14,7 +14,7 @@ class Lecture_Session(models.Model):
     date = models.DateField(blank=True ,null=True)
     stud_div=models.CharField(max_length=1, blank=True)
     machine_id = models.CharField(max_length=250, default="N.A", blank=False)
-    branch=models.CharField(max_length=200,blank=False)
+    branch=models.CharField(max_length=250)
     
     def __str__(self):
         return self.session_id

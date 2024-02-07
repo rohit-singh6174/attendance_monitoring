@@ -16,7 +16,7 @@ class Student(models.Model):
     stud_phone= models.CharField(max_length=12)
     stud_email=models.EmailField()
     stud_div=models.CharField(max_length=1)
-    branch=models.ForeignKey(Department, on_delete=models.CASCADE)
+    branch=models.CharField(max_length=250)
     stud_profile=models.ImageField(upload_to="student", null=True)
     finger_id=models.IntegerField()
     year_of_admission=models.IntegerField()
