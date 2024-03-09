@@ -4,9 +4,11 @@ from .models import Machine, Attendance_table
 from students.models import Student
 from lec_session.models import Lecture_Session
 from datetime import datetime
+from .filters import AttendanceFilter
 
 # Create your views here.
 class Atten:
+
     def new_attendance(request):
         if request.method =='GET':
             machine_id=request.GET.get("machine_id")
@@ -30,22 +32,60 @@ class Atten:
                         #Check is session is active for that year and branch
 
                         if Lecture_Session.objects.filter(machine_id=machine_id).filter(is_active=True):
-                            print(session_id)
+                            
                             attendance_obj= Attendance_table.objects.create(stud_name=student_name,roll_no=student_roll_no,sem_type=True,session_id=session_id,is_present=True,date=datetime.now().date())
                             attendance_obj.save()
 
                         else:
                             return HttpResponse(f"No session is active for --> {current_admission_year}")
+                return HttpResponse("OK")
+                return HttpResponse("Student Finger Id Not Found")
+            return HttpResponse("Finger Id Not Matched")
+        
+
+    def view_attendance(request):
+        print("ok")
+        all_attendance=Attendance_table.objects.all()
+        
+        myFilter = AttendanceFilter(request.GET, queryset=all_attendance)
+        all_attendance= myFilter.qs
+
+
+        context ={
+        "attendance":all_attendance,
+        "myFilter":myFilter
+        }
+        
+        return render(request,'attendance/view_attendance.html',context)
+    
+            # if request.user.is_authenticated:
+                # if request.method =='POST':
+                #     date = request.POST.get("date")
+                #     session_id = request.POST.get("session_id")
+
+                #     if(not date=="" or not session_id=="none" or session_id==""):
+                #         try:
+                #             if(session_id=="" or session_id =="none"):
+                #             session_id_lst=Session.objects.filter(teacher_name=request.user.first_name).filter(date__gte =  date)
+                #             attendance_data = Attendance.objects.filter(session_id__in =  session_id_lst)
+                #             return JsonResponse({'attendance':list(attendance_data.values())})
+                #         else:
+                #             attendance_data = Attendance.objects.filter(session_id =  session_id)
+                #             return JsonResponse({'attendance':list(attendance_data.values())})
+                #     except:
+                #         return HttpResponse('0')
+                # else:
+                #     return HttpResponse("2")
+            # else:
+        #         session_id_lst=Session.objects.filter(teacher_name=request.user.first_name).values("session_id","date").order_by('-session_id')[0:50]
+        #         context={
+        #             'session_id_lst':session_id_lst,
+        #         }
+        #         return render(request,'view_attendance.html',context=context)
+        # return redirect("/sign_in")
+
 
         
-                return HttpResponse("OK")
-            
-                return HttpResponse("Student Finger Id Not Found")
-
-
-            return HttpResponse("Finger Id Not Matched")
-    
-                
 
 
 

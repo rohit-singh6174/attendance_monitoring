@@ -60,6 +60,7 @@ class Login(View):
                 if user is not None:
                     print("Ok")
                     auth.login(request, user)
+                    messages.success(request, 'You are logged in')
                     return redirect('home')
                 else:
                     print("Invalid Password")
@@ -74,11 +75,11 @@ class Login(View):
 
 
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
+# @method_decorator(login_required(login_url='login'), name='dispatch')
 class Logout(View):
     def get(self, request, *args, **kwargs):
         logout(request)
-        messages.success(request, 'You are logged out.')
+        print("logout")
         return redirect('login')
     
 

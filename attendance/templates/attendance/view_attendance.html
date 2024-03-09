@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid px-4">
+   
+    <h1 class="mt-4">View Attendance</h1>
+
+
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">List</li>
+    </ol>
+
+  
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="container">
+                
+              
+              <form method="get">
+                <div class="d-flex justify-content-start">
+                      {{ myFilter.form }} 
+                      <button type="submit" class="btn btn-primary">Filter</button>
+                      </div>
+              </form>
+            </div>
+        </div>
+
+        <div class="card-body">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                  <th>Rollno</th>
+                  <th>Name</th>
+                  <th>Sem Type</th>
+                  <th>date</th>
+                  <th>Session Id</th>
+                  <th>Present</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for attendance in attendance %}
+              <tr>
+                  <td>{{attendance.roll_no}}</td>
+                  <td>{{attendance.stud_name}}</td>
+                  <td>
+                      {% if attendance.sem_type == True %}
+                         Even Sem
+                      {% else %}
+                         Odd Sem
+                      {% endif %}
+                     
+                  </td>
+                  <td>{{attendance.date}}</td>
+                  <td>{{attendance.session_id}}</td>
+                  <td>{{attendance.is_present}}</td>
+              
+              </tr>
+          {% endfor %}
+
+            </tbody>
+          </table>
+            
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
