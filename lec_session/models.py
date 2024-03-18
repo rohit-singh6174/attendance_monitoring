@@ -11,6 +11,7 @@ class Lecture_Session(models.Model):
     email=models.EmailField(max_length=100)
     start_time = models.TimeField(default='00:00:00')
     end_time = models.TimeField(default='00:00:00')
+    sem_type = models.BooleanField(default=False)
     date = models.DateField(blank=True ,null=True)
     stud_div=models.CharField(max_length=1, blank=True)
     machine_id = models.CharField(max_length=250, default="N.A", blank=False)

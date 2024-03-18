@@ -14,7 +14,7 @@ class AttendanceFilter(django_filters.FilterSet):
     class Meta:
         model = Attendance_table
         fields= '__all__'
-        exclude=['id','stud_name','roll_no','session_id']
+        exclude=['id','stud_name','roll_no','sem_type','stud_profile','stud_email']
         widgets={'date': DateInput()}
     
    

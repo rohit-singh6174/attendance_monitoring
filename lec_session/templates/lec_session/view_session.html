@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<style>
+    .card:hover {
+        border-color: #007bff; /* Change border color on hover */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
+    }
+    
+</style>
 <div class="container-fluid px-4">
+
+    {% include "lec_session/includes/alert.html" %}
     
     <h1 class="py-2">View Session</h1>
 
@@ -18,14 +27,14 @@
                     <div class="col-6">
                         <!-- Content for the first half -->
                         <h5 class="card-title">{{session.subject_name}}</h5>
-                        <p class="card-text">Date: {{session.date}} | Start Time:  {{session.start_time}} | End Date</p>
+                        <p class="card-text">Date: {{session.date}} | Start Time:  {{session.start_time}} | End Date :  {% if session.is_active %} Ongoing {% else %}{{session.end_time}} {% endif %} <br>Sem: {{session.sem_type}}</p>
                         
                         {% if session.is_active %}
                                 <!-- Content to display if boolean_value is True -->
-                                <p>Session is Active</p>
+                                <p class="text-success"><b>Session is Active</b></p>
                             {% else %}
                                 <!-- Content to display if boolean_value is False -->
-                                <p>Session Ended</p>
+                                <p class="text-danger"><b>Session Ended</b></p>
                         {% endif %}
                      
                     </div>
@@ -33,8 +42,12 @@
                     <div class="col-6 d-flex flex-row-reverse">
                         <!-- Content for the second half -->
                         <div>
-                        <a href="#" class="btn btn-primary">Start</a>
-                        <a href="#" class="btn btn-danger">End</a>
+                            {% if session.is_active %}
+                                
+                                <a href="{% url 'end_session' session_id=session.session_id %}" class="btn btn-danger">End</a>
+                            {% else %}
+                            <p class="text-danger"><b>Session Ended</b></p>
+                            {% endif%}
                         </div>
                     </div>
                 </div>

@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+<script src="{% static 'attendance/table2excel.js' %}"> </script>
+<script src="{% static 'attendance/script.js' %}"> </script>
+
 <div class="container-fluid px-4">
    
+
     <h1 class="mt-4">View Attendance</h1>
 
 
@@ -16,13 +21,39 @@
             <div class="container">
                 
               
-              <form method="get">
+              <form method="post" id="view_form">
+                {% csrf_token %}
                 <div class="d-flex justify-content-start">
-                      {{ myFilter.form }} 
-                      <button type="submit" class="btn btn-primary">Filter</button>
-                      </div>
-              </form>
+                    <label for="date" class="mx-1 my-1">Select Date</label>
+                    <input id="date" class="mx-1 my-1 p-1" type="date" name="selected_date" />
+
+                    {% if session_id_lst %}
+                    <label for="session_id" class="mx-3 my-1">Select Session</label>
+                    <select class="mx-1 my-1 p-1" name="session_id" id="session_id">
+                      <option value="">Select Session</option>
+                      {% for i in session_id_lst %}
+                      <option value="{{i.session_id}}"> {{i.session_id}}  ⏳  {{i.date}}</option>
+                     {% endfor %}
+                    </select>
+                    {% endif %}
+
+                    {% comment %} <label for="sem_type" class="mx-3 my-1">Type Sem</label>
+                    <select class="mx-1 my-1 p-1" name="sem_type" id="sem_type">
+                      <option value="">All</option>
+                      <option value="False">Odd</option>
+                      <option value="True">Even</option>
+                    </select> {% endcomment %}
+                      
+
+                    <button type="submit" id="view_form_btn" class="btn btn-primary ">Filter</button>
+                  </form>
+                  <span class="mx-2 my-1">   </span>
+
+                  <button onclick="tableToExcel()" class="btn btn-warning ml-3">Export to Excel</button>
+              </div>
+
             </div>
+            
         </div>
 
         <div class="card-body">
@@ -31,10 +62,14 @@
               <tr>
                   <th>Rollno</th>
                   <th>Name</th>
-                  <th>Sem Type</th>
+                  <th>Branch</th>
+                  <th>Year</th>
+                  <th>Sem</th>
+                 
                   <th>date</th>
                   <th>Session Id</th>
                   <th>Present</th>
+                  
               </tr>
             </thead>
 
@@ -43,14 +78,10 @@
               <tr>
                   <td>{{attendance.roll_no}}</td>
                   <td>{{attendance.stud_name}}</td>
-                  <td>
-                      {% if attendance.sem_type == True %}
-                         Even Sem
-                      {% else %}
-                         Odd Sem
-                      {% endif %}
-                     
-                  </td>
+                  <td>{{attendance.branch}}</td>
+                  <td>{{attendance.admission_year}}</td>
+                  <td>{{attendance.sem_type}}</td>
+                
                   <td>{{attendance.date}}</td>
                   <td>{{attendance.session_id}}</td>
                   <td>{{attendance.is_present}}</td>
@@ -60,6 +91,8 @@
 
             </tbody>
           </table>
+
+         
             
         </div>
 

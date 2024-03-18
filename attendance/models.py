@@ -27,6 +27,13 @@ class Attendance_table(models.Model):
     session_id = models.CharField(max_length=250, blank=True, null=True)
     stud_name = models.CharField(max_length=180, blank=True)
     sem_type = models.BooleanField(default=False)
+    branch=models.CharField(max_length=250, null=True)
+    stud_profile=models.ImageField(upload_to="student", null=True)
+    stud_email=models.EmailField(null=True)
+    admission_year = models.PositiveIntegerField(
+            validators=[MinValueValidator(1900)],null=True, help_text="Use the following format: <YYYY>")
+
+    
 
     def __str__(self):
         return f"{self.stud_name} , {self.session_id}"
