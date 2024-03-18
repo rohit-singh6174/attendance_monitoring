@@ -6,8 +6,7 @@ from lec_session.models import Lecture_Session
 from datetime import datetime
 from .filters import AttendanceFilter
 
-from django.views.generic import View
-from pyexcel_xlsx import save_data
+
 
 # Create your views here.
 class Atten:
@@ -180,5 +179,4 @@ class Atten:
             # print(res)
 
 
-            
             
