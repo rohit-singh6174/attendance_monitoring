@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src": "attendance_system/wsgi.py",
+        "use": "vercel/python",
+        "config": { "maxLambdaSize": "500mb","runtime":"python3.11.4" }
+    }],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "attendance_system/wsgi.py"
+        }
+    ]
+}
