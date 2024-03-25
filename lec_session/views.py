@@ -110,7 +110,28 @@ def end_session(request,session_id):
             return redirect('view_session')
 
         
-        
+def session_summary(request,session_id):
+   if request.user.is_authenticated:
+       print(session_id)
+
+       current_session = Lecture_Session.objects.filter(session_id=session_id).first()
+
+       session_attendance= Attendance_table.objects.filter(session_id=current_session.session_id).all()
+
+       total_attendance_count = session_attendance.count()
+       present=session_attendance.filter(is_present=True).count()
+       absent=session_attendance.filter(is_present=False).count()
+       
+
+
+       context={
+           "sessions":current_session,
+            "attendances":session_attendance,
+            "total_attendance_count":total_attendance_count,
+            "present":present,
+            "absent":absent
+       }
+       return render(request,"lec_session/session_summary.html",context)
     
 
 # def test_session(request):

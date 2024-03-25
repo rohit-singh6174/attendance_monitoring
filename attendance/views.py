@@ -5,7 +5,8 @@ from students.models import Student
 from lec_session.models import Lecture_Session
 from datetime import datetime
 from .filters import AttendanceFilter
-
+from datetime import date
+from django.db.models import Q
 
 
 # Create your views here.
@@ -89,19 +90,42 @@ class Atten:
 
     def recent_attendance(request):
         print("ok")
-        all_attendance=Attendance_table.objects.all()
 
-        context ={
-        "attendance":all_attendance,
-        
-        }
+        if request.user.is_authenticated:
+            email = request.user.email
+            current_date = date.today()
 
-        return render(request,"attendance/recent_attendance.html",context)
+            active_session = Lecture_Session.objects.filter(email=email, is_active=True, date=current_date).first()
+            print(active_session)
+            if active_session:
+                attendance_data = Attendance_table.objects.filter(session_id=active_session.session_id)
+                print(attendance_data)
+                
+                context = {
+                    "attendance": attendance_data,
+                    "recent_session":active_session,
+                   
+                }
+                return render(request, "attendance/recent_attendance.html", context)
+            else:
+                 return render(request, "attendance/recent_attendance.html")
+            # if active_session:
+            #     attendance_data = Attendance_table.objects.filter(session_id=active_session.session_id)
+            #     context = {
+            #         "attendance": attendance_data,
+            #         }
+            #     return render(request, "attendance/recent_attendance.html", context)
+            # else:
+            #     return render(request,"attendance/recent_attendance.html")
+            # return HttpResponse("OK")
+
+            
+            
+                                                              
     
 
     def view_attendance_download(request):
         if request.user.is_authenticated:
-           
             if request.method =='GET':
                 date = request.GET.get("date")
                 session_id = request.GET.get("session_id")

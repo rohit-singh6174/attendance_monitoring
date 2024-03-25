@@ -3,64 +3,67 @@
 {% block content %}
 <div class="container-fluid px-4">
    
-    <h1 class="mt-4">Recent Attendance</h1>
-
-
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">List</li>
-    </ol>
-
-  <div>
-    <table class="table align-middle mb-0 bg-white">
-        <thead class="bg-dark p-2">
-          <tr>
-            <th class="text-white">Student</th>
-            <th class="text-white">Rollno</th>
-            <th class="text-white">Class</th>
-            <th class="text-white">Sem</th>
-            <th class="text-white">Session</th>
-            <th class="text-white">Present</th> 
-          </tr>
-        </thead>
-        <tbody>
-          {% for attendance in attendance %}
-          <tr>
-            <td>
-              <div class="d-flex align-items-center">
-                <img
-                    src="{{ attendance.stud_profile.url }}"
-                    alt=""
-                    style="width: 45px; height: 45px"
-                    class="rounded-circle"
-                    />
-                <div class="ms-3">
-                  <p class="fw-bold mb-1">{{attendance.stud_name}}</p>
-                  <p class="text-muted mb-0">{{attendance.stud_email}}</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              {{attendance.roll_no}}
-            </td>
-            <td>
-              <p class="fw-normal mb-1">{{attendance.branch}}</p>
-              <p class="text-muted mb-0">{{attendance.admission_year}}</p>
-            </td>
-            <td>
-              {{attendance.sem_type}}
-            </td>
-            <td>{{attendance.session_id}}</td>
-            <td>
-              {{attendance.is_present}}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-  </div>
-
-
+  <div class="row">
+    <div class="col-md-6">
+        <h1 class="mt-4">Recent Attendance</h1>
+    </div>
+    <div class="col-md-6 text-md-end">
+      {% if recent_session %}  
+        <a href="{% url 'end_session' session_id=recent_session.session_id %}" class="btn btn-danger btn-lg mt-4">End Session</a>
+      {% else %}
+      {% endif %}
+    </div>
 </div>
 
+    <ol class="breadcrumb mb-4">
+        {% if recent_session %}
+        <li class="breadcrumb-item">Subject: {{recent_session.subject_name}}</li>  
+        <li class="breadcrumb-item active">Session Id: {{recent_session.session_id}}</li>
+        <li class="breadcrumb-item active"> Semester :
+        {% if recent_session.sem_type %}
+                            Even
+                        {% else %}
+                            Odd
+                        {% endif %}
+        </li>
+        {%else%}
+        <li class="breadcrumb-item">No Session Created Recently</li>  
+        {% endif%}
+    </ol>
 
+    <div>
+        <table class="table align-middle mb-0 bg-white">
+            <thead class="bg-dark p-2">
+                <tr>
+                    <th class="text-white">Student</th>
+                    <th class="text-white">Rollno</th>
+                    <th class="text-white">Class</th>
+                    <th class="text-white">Present</th> 
+                </tr>
+            </thead>
+            <tbody>
+                    {% for entry in attendance %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ entry.stud_profile.url }}" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                    <div class="ms-3">
+                                        <p class="fw-bold mb-1">{{ entry.stud_name }}</p>
+                                        <p class="text-muted mb-0">{{ entry.stud_email }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ entry.roll_no }}</td>
+                            <td>
+                                <p class="fw-normal mb-1">{{ entry.branch }}</p>
+                                <p class="text-muted mb-0">{{ entry.admission_year }}</p>
+                            </td>
+                            <td>{{ entry.is_present }}</td>
+                        </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
 {% endblock %}

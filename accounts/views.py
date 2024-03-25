@@ -6,6 +6,9 @@ from .models import Account
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth import logout
+from django.http import JsonResponse
+
+
 # Create your views here.
 class Register(View):
     def get(self,request):
@@ -41,12 +44,12 @@ class Register(View):
         return render(request,"accounts/register.html",context)
 
 class Login(View):
-    def get(self,request):
-        form = LoginForm(request.POST)
-        context={
-            "form":form
-        }
-        return render(request,"accounts/login.html",context)
+    def get(self, request):
+        form = LoginForm()  # Create an instance of the form
+        context = {
+            "form": form
+            }
+        return render(request, "accounts/login.html", context)
     
     def post(self,request):
         form = LoginForm(request.POST)
@@ -72,6 +75,31 @@ class Login(View):
             "form":form
         }
         return render(request,"accounts/login.html",context)
+        
+    # def post(self,request):
+    #     form = LoginForm(request.POST)
+
+    #     if form.is_valid():
+    #         #print("Ok")
+    #         email = form.cleaned_data['email']
+    #         if Account.objects.filter(email=email).exists():
+    #             password= form.cleaned_data['password']
+    #             user  =auth.authenticate(email=email,password=password)
+    #             if user is not None:
+    #                 print("Ok")
+    #                 auth.login(request, user)
+    #                 messages.success(request, 'You are logged in')
+    #                 return redirect('home')
+    #             else:
+    #                 print("Invalid Password")
+    #         else:
+    #             print("Email Does not Exist")
+
+
+    #     context={
+    #         "form":form
+    #     }
+    #     return render(request,"accounts/login.html",context)
 
 
 

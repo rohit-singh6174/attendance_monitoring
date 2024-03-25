@@ -26,7 +26,8 @@ urlpatterns = [
     path('catlog/',include('catlog.urls')),
     path('students/',include('students.urls')),
     path('lec_session/',include('lec_session.urls')), # sessions
-    path('attendance/',include('attendance.urls')) #attendance
+    path('attendance/',include('attendance.urls')), #attendance
+    path('alertapp/',include('alertapp.urls')) #alert test
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

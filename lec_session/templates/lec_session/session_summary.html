@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    .card:hover {
+        border-color: #007bff; /* Change border color on hover */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
+    }
+    
+</style>
+<div class="container-fluid px-4"> 
+    <h1 class="py-2">Session Summary</h1>
+    <br>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Session : {{sessions.session_id}}  </li>
+        <li class="breadcrumb-item active">Session : {{sessions.sem_type}}  </li>
+    </ol>
+
+    <!--Blocks-->
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body text-center">
+                <img src="{% static 'img/newprofile.png' %}" alt="New Profile">
+                <h2>{{total_attendance_count}}</h2>
+                </div>
+                <div class="card-footer text-center">
+                    <span class="h6" >Total Students</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/subject.png' %}"  width="100" height="100" alt="Attendances">
+                    <h2> {{sessions.subject_name}}</h2>    
+                </div>
+                <div class="card-footer text-center">
+                    <span class="h6" >Subject </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/session.png' %}" alt="session">
+                    <h2>{{present}}</h2>
+                </div>
+                <div class="card-footer text-center">
+                    <span class="h6" >Attended</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body text-center">
+                    <img src="{% static 'img/view.png' %}" alt="view">
+                    <h2>{{absent}}</h2>
+                </div>
+                <div class="card-footer text-center">
+                    <span class="h6" >Absents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!--Blocks-->
+
+
+    <!--Block-->
+    <div >
+
+        <div class="card-body">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+                <th>Rollno</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Year</th>
+             
+                <th>date</th>
+                <th>Present</th>
+                
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for attendance in attendances %}
+            <tr>
+                <td>{{attendance.roll_no}}</td>
+                <td>{{attendance.stud_name}}</td>
+                <td>{{attendance.branch}}</td>
+                <td>{{attendance.admission_year}}</td>
+                
+                <td>{{attendance.date}}</td>
+                <td>{{attendance.is_present}}</td>
+            
+            </tr>
+            {% endfor %}
+    
+
+          </tbody>
+        </table>
+
+
+       
+        
+       
+
+    </div>
+    <!--End Block-->
+
+</div>
+{% endblock %}

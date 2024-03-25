@@ -46,7 +46,7 @@
                                 
                                 <a href="{% url 'end_session' session_id=session.session_id %}" class="btn btn-danger">End</a>
                             {% else %}
-                            <p class="text-danger"><b>Session Ended</b></p>
+                            <a href="{% url 'session_summary' session_id=session.session_id %}" class="btn btn btn-warning">View Details</a>
                             {% endif%}
                         </div>
                     </div>
