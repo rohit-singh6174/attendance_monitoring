@@ -17,18 +17,18 @@
 
     <ol class="breadcrumb mb-4">
         {% if recent_session %}
-        <li class="breadcrumb-item">Subject: {{recent_session.subject_name}}</li>  
-        <li class="breadcrumb-item active">Session Id: {{recent_session.session_id}}</li>
-        <li class="breadcrumb-item active"> Semester :
-        {% if recent_session.sem_type %}
-                            Even
-                        {% else %}
-                            Odd
-                        {% endif %}
-        </li>
-        {%else%}
-        <li class="breadcrumb-item">No Session Created Recently</li>  
-        {% endif%}
+            <li class="breadcrumb-item">Subject: {{ recent_session.subject_name }}</li>  
+            <li class="breadcrumb-item active">Session Id: {{ recent_session.session_id }}</li>
+            <li class="breadcrumb-item active"> Semester:
+                {% if recent_session.sem_type == True %}
+                    Even
+                {% else %}
+                    Odd
+                {% endif %}
+            </li>
+        {% else %}
+            <li class="breadcrumb-item">No Session Created Recently</li>  
+        {% endif %}
     </ol>
 
     <div>

@@ -7,7 +7,8 @@ from datetime import datetime
 from .filters import AttendanceFilter
 from datetime import date
 from django.db.models import Q
-
+from collections import defaultdict
+import pprint
 
 # Create your views here.
 class Atten:
@@ -95,11 +96,14 @@ class Atten:
             email = request.user.email
             current_date = date.today()
 
+
+        
             active_session = Lecture_Session.objects.filter(email=email, is_active=True, date=current_date).first()
             print(active_session)
             if active_session:
                 attendance_data = Attendance_table.objects.filter(session_id=active_session.session_id)
                 print(attendance_data)
+
                 
                 context = {
                     "attendance": attendance_data,
@@ -164,7 +168,49 @@ class Atten:
                     return HttpResponse("<h3 align='center' , color = 'red'>Failed to view.. First View attendance</h3>")
         return redirect("view_attendance")
 
+    def subjectwise_attendanc(request):
+        all_attendance=Attendance_table.objects.all()
+        students= Student.objects.all()
 
+        allsession_lst=Lecture_Session.objects.filter(email=request.user.email).values("session_id","date").order_by('-session_id')
+
+        session_lst= Lecture_Session.objects.filter(email=request.user.email).values("session_id","date").order_by('-session_id')
+
+        attendance_dict = defaultdict(dict)
+
+        for session in session_lst:
+            session_id = session['session_id']
+            attendance_records = Attendance_table.objects.filter(session_id=session_id)
+            for attendance in attendance_records:
+                student_roll_no = attendance.roll_no
+                is_present = attendance.is_present
+                attendance_dict[student_roll_no][session_id] = is_present
+             
+        pprint.pp(attendance_dict)
+
+         # Calculate total attendance for each student
+        for student in students:
+            total_attendance = sum(1 for session_attendance in attendance_dict[student.stud_roll_no].values() if session_attendance)
+            student.total_attendance = total_attendance
+        
+        
+
+        # for session in session_lst:
+        #     for attend in all_attendance:
+        #         if session.session_id == attend.session_id and attend.roll_no == student.stud_roll_no:
+        #             print(session," ",attend.is_present)
+        
+        
+
+            
+        context ={
+        "attendance":all_attendance,
+        'session_id_lst':session_lst,
+        "students":students,
+        "attendance_dict":attendance_dict
+        }
+        
+        return render(request,'attendance/subjectwise_attendanc.html',context)
 
             # if request.user.is_authenticated:
                 # if request.method =='POST':

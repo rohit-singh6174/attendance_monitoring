@@ -12,9 +12,15 @@
     <h1 class="py-2">Session Summary</h1>
     <br>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Session : {{sessions.session_id}}  </li>
-        <li class="breadcrumb-item active">Session : {{sessions.sem_type}}  </li>
-    </ol>
+        <li class="breadcrumb-item active">Session : {{sessions.session_id}}</li>
+        <li class="breadcrumb-item active">Sem : 
+            {% if sessions.sem_type == True %}
+            Even
+            {% else %}
+            Odd
+            {% endif%}
+         </li>
+    </ol>=
 
     <!--Blocks-->
     <div class="row">

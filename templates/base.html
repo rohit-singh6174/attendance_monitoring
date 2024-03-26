@@ -91,6 +91,7 @@
                                     
                                     <a href="{% url 'recent_attendance' %}" class="nav-link">Recent Attendance</a>
                                     <a href="{% url 'view_attendance' %}" class="nav-link">View Attendance</a>
+                                    <a href="{% url 'subjectwise_attendanc' %}" class="nav-link">Subjectwise Attendance</a>
                                     
             
                                 </nav>
@@ -116,12 +117,15 @@
                     </div>
                 </nav>
             </div>
+
+
             <div id="layoutSidenav_content">
                 <main class="bg-light">
                     {% block content%}
                 
                     {% endblock%}
                 </main>
+                
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
