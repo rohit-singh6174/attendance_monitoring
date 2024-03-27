@@ -6,7 +6,7 @@ from lec_session.models import Lecture_Session
 
 class Lecture_SessionAdmin(admin.ModelAdmin):
     list_filter=("subject_name","is_active","branch","date")
-    list_display=("session_id","subject_name","branch","date","is_active")
+    list_display=("session_id","subject_name","branch","date","is_active","admission_year")
    
     
 admin.site.register(Lecture_Session,Lecture_SessionAdmin)

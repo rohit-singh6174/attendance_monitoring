@@ -169,12 +169,40 @@ class Atten:
         return redirect("view_attendance")
 
     def subjectwise_attendanc(request):
+
         all_attendance=Attendance_table.objects.all()
         students= Student.objects.all()
 
-        allsession_lst=Lecture_Session.objects.filter(email=request.user.email).values("session_id","date").order_by('-session_id')
+        allsession_lst=Lecture_Session.objects.filter(email=request.user.email).values("session_id","date","subject_name").order_by('-session_id')
 
-        session_lst= Lecture_Session.objects.filter(email=request.user.email).values("session_id","date").order_by('-session_id')
+        session_lst= Lecture_Session.objects.filter(email=request.user.email).values("session_id","date","subject_name").order_by('-session_id')
+
+
+        if request.method == 'POST':
+            admission_year = request.POST.get('admission_year')
+            branch=request.POST.get('branch')
+            sem=request.POST.get('sem')
+            div=request.POST.get('div')
+            subject=request.POST.get('subject')
+
+            # session_lst = Lecture_Session.objects.filter(
+            # email=request.user.email,
+            # admission_year=admission_year,
+            # branch=branch,
+            # sem_type=sem,
+            # stud_div=div,
+            # subject_name=subject
+            # ).values("session_id", "date", "subject_name").order_by('-session_id')
+        
+
+            session_lst = Lecture_Session.objects.filter(email=request.user.email, admission_year=admission_year).filter(branch=branch).filter(sem_type=sem).filter(stud_div=div).filter(subject_name=subject).values("session_id", "date", "subject_name").order_by('-session_id')
+
+            pprint.pp(session_lst)
+
+
+
+            
+           
 
         attendance_dict = defaultdict(dict)
 
@@ -186,23 +214,14 @@ class Atten:
                 is_present = attendance.is_present
                 attendance_dict[student_roll_no][session_id] = is_present
              
-        pprint.pp(attendance_dict)
+        # pprint.pp(attendance_dict)
 
          # Calculate total attendance for each student
         for student in students:
             total_attendance = sum(1 for session_attendance in attendance_dict[student.stud_roll_no].values() if session_attendance)
             student.total_attendance = total_attendance
         
-        
-
-        # for session in session_lst:
-        #     for attend in all_attendance:
-        #         if session.session_id == attend.session_id and attend.roll_no == student.stud_roll_no:
-        #             print(session," ",attend.is_present)
-        
-        
-
-            
+         
         context ={
         "attendance":all_attendance,
         'session_id_lst':session_lst,

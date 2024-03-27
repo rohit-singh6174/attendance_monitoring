@@ -58,7 +58,7 @@ def create_session(request):
                     return HttpResponse('Session is already started')
                 else:
                     session_id=get_session_id()
-                    new_session=Lecture_Session.objects.create(session_id=session_id,is_active=True,subject_name=subject_name,email=email,start_time=datetime.now().time(),date=datetime.now().date(),stud_div=stud_div,machine_id=machine_id,branch=branch, sem_type=sem_type)
+                    new_session=Lecture_Session.objects.create(session_id=session_id,admission_year=year_of_admission,is_active=True,subject_name=subject_name,email=email,start_time=datetime.now().time(),date=datetime.now().date(),stud_div=stud_div,machine_id=machine_id,branch=branch, sem_type=sem_type)
                     new_session.save()
                 messages.success(request, 'Session Create Succssfully')
             else:

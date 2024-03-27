@@ -43,17 +43,15 @@
                     <option value="BIOM">BIOM</option>
                 </select>
 
-                <label for="branch" class="mx-1 my-1">Branch</label>
-                  <select  class="mx-2  rounded" name="branch" id="branch">
-                    <option value="">Branch</option>
-                    <option value="IT">IT</option>
-                    <option value="CO">CO</option>
-                    <option value="EXTC">EXTC</option>
-                    <option value="BIOM">BIOM</option>
-                </select>
-
+                <label for="div" class="mx-1 my-1">Division</label>
+                <select  class="mx-2  rounded" name="div" id="div">
+                  <option value="">Select Division</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+              </select>
+              
                 <label for="sem" class="mx-1 my-1">Semester</label>
-                <select  class="mx-2  rounded" name="branch" id="branch">
+                <select  class="mx-2  rounded" name="sem" id="sem">
                   <option value="">Select Semester</option>
                   <option value=True>Even</option>
                   <option value=False>Odd</option>
@@ -63,17 +61,13 @@
                 <input type="text" class="mx-2  rounded" name="subject" placeholder="Enter Subject"/ >
 
               </div>
+              <!--Filter Row1 End -->
 
               <!--Filter Row2 -->
-              <div class="d-flex justify-content-start mt-2">
-                <label for="admission_year" class="mx-2 my-1"> Division  </label>
-                <select  class="mx-2  rounded" name="admission_year" id="admission_year">
-                  <option value="">Select Division</option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <!-- Add more options as needed -->
-                </select>
-                
+           
+              <div class="d-flex justify-content-start mt-3">
+               
+              
                 <label for="branch" class="mx-2 my-1"> <b>Durations</b></label>
                 <label for="branch" class="mx-4 my-1">From</label>
                 <input  class="mx-2 rounded" type="date" id="start_date" name="start_date">
@@ -82,11 +76,10 @@
                 <input  class="mx-2 rounded" type="date" id="end_date" name="end_date">
 
 
-                <button type="submit" id="view_form_btn" class="btn btn-primary mx-5">Filter</button>
-
-               
+                <button type="submit" id="view_form_btn" class="btn btn-primary mx-5" style="width:100px">Filter</button>
 
               </div>
+             <!--Filter Row 2 End-->
 
               <form>
 
@@ -105,7 +98,10 @@
                       <th hidden>Sem</th>
                       {% for session in session_id_lst %}
                       <th>{{ session.session_id }} <br>
-                      {{session.date}}
+                      {{session.date}} <br>
+                      {{session.subject_name}}<br>
+                     
+
                       </th>
                       {% endfor %}
                       <th>Total</th>
