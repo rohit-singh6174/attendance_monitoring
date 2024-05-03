@@ -76,14 +76,25 @@ def create_session(request):
 
 def end_session(request,session_id):
    if request.user.is_authenticated:
+        
         # Retrieve the Lecture_Session object based on the session_id
         print("Session ID:",session_id)
-        
-        present_students = Attendance_table.objects.filter(session_id=session_id, is_present=True).values_list("roll_no", flat=True)
+        lecture_session = Lecture_Session.objects.get(session_id=session_id)
+
+        present_students = Attendance_table.objects.filter(session_id=session_id,is_present=True,stud_div=lecture_session.stud_div).values_list("roll_no", flat=True)
         
         # Get the absent students based on their roll numbers
-        absent_students = Student.objects.exclude(stud_roll_no__in=present_students).values("stud_roll_no", "stud_name")
         
+        # absent_students = Student.objects.exclude(stud_roll_no__in=present_students,stud_div=lecture_session).values("stud_roll_no", "stud_name")
+        
+        absent_students = Student.objects.filter(
+            year_of_admission=lecture_session.admission_year,
+            branch=lecture_session.branch,
+            stud_div=lecture_session.stud_div
+        ).exclude(
+            stud_roll_no__in=present_students
+        ).values("stud_roll_no", "stud_name")
+
         
          # Retrieve the details of absent students
        

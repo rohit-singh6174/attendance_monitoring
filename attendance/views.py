@@ -16,6 +16,7 @@ class Atten:
     def new_attendance(request):
         if request.method =='GET':
             machine_id=request.GET.get("machine_id")
+
             if Machine.objects.filter(machine_id=machine_id).exists():
                 fingerprint_id=request.GET.get("fingerprint_id")
                 #finger_id = 1,2,3,8,6  i
@@ -25,32 +26,43 @@ class Atten:
                 current_admission_year=current_machine["admission_year"]
 
                 session_data_lst = list(Lecture_Session.objects.filter(machine_id=machine_id).filter(is_active=True).values())
-                session_id = session_data_lst[0]["session_id"]   
+                #1 new current active session 
+                session_id = session_data_lst[0]["session_id"]
+                session_div= session_data_lst[0]["stud_div"]
+
+                print("Lect Div :",session_div)   
           
                 for i in finger_id_list:
-                    if Student.objects.filter(year_of_admission=current_admission_year).filter(branch=current_branch).filter(finger_id=i).exists():
+                    if Student.objects.filter(year_of_admission=current_admission_year).filter(branch=current_branch).filter(stud_div=session_div).filter(finger_id=i).exists():
                         student_data= list(Student.objects.filter(year_of_admission=current_admission_year).filter(branch=current_branch).filter(finger_id=i).values())
                         student_name=student_data[0]['stud_name']
                         student_roll_no=student_data[0]['stud_roll_no']
                         student_profile= student_data[0]['stud_profile']
                         student_email=student_data[0]['stud_email']
-
-                        print(f'{student_name}:{student_roll_no}:{student_email}:{student_profile}')
-                
-                
+                        student_div=student_data[0]['stud_div']
+                        
                         #Check is session is active for that year and branch
 
-
-                        if Lecture_Session.objects.filter(machine_id=machine_id).filter(is_active=True):
+                        if Lecture_Session.objects.filter(machine_id=machine_id).filter(is_active=True): 
+                            print(f'{student_name}:{student_roll_no}:{student_email}:{student_profile}')
+                #           
+                            if Attendance_table.objects.filter(roll_no=student_roll_no, admission_year=current_admission_year, session_id=session_id, is_present=True).exists():
+                                msg="Session : ",str(session_id)," Attendance Marked Already for  Rollno :",str(student_roll_no)
+                                return HttpResponse(msg)
                             
-                            attendance_obj= Attendance_table.objects.create(stud_name=student_name,roll_no=student_roll_no,sem_type=True,session_id=session_id,is_present=True,date=datetime.now().date(),branch=current_branch,admission_year=current_admission_year,stud_profile=student_profile,stud_email=student_email)
+                            attendance_obj= Attendance_table.objects.create(stud_name=student_name,roll_no=student_roll_no,sem_type=True,session_id=session_id,is_present=True,date=datetime.now().date(),branch=current_branch,admission_year=current_admission_year,stud_profile=student_profile,stud_email=student_email,stud_div=student_div)
                             attendance_obj.save()
 
                         else:
-                            return HttpResponse(f"No session is active for --> {current_admission_year}")
+                            return HttpResponse(f"No session is active for --> {current_admission_year}")                        
+                    else:
+                        return HttpResponse("Student Doesn't Exist")
+                    
                 return HttpResponse("OK")
-                return HttpResponse("Student Finger Id Not Found")
-            return HttpResponse("Finger Id Not Matched")
+            else:
+                return HttpResponse("This Machine is Not Registered")
+            
+        
         
 
     def view_attendance(request):
@@ -185,24 +197,13 @@ class Atten:
             div=request.POST.get('div')
             subject=request.POST.get('subject')
 
-            # session_lst = Lecture_Session.objects.filter(
-            # email=request.user.email,
-            # admission_year=admission_year,
-            # branch=branch,
-            # sem_type=sem,
-            # stud_div=div,
-            # subject_name=subject
-            # ).values("session_id", "date", "subject_name").order_by('-session_id')
+            if sem =='Both':
+                session_lst = Lecture_Session.objects.filter(email=request.user.email, admission_year=admission_year).filter(branch=branch).filter(stud_div=div).filter(subject_name=subject).values("session_id", "date", "subject_name").order_by('-session_id')
         
 
             session_lst = Lecture_Session.objects.filter(email=request.user.email, admission_year=admission_year).filter(branch=branch).filter(sem_type=sem).filter(stud_div=div).filter(subject_name=subject).values("session_id", "date", "subject_name").order_by('-session_id')
 
             pprint.pp(session_lst)
-
-
-
-            
-           
 
         attendance_dict = defaultdict(dict)
 

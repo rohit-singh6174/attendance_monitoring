@@ -28,6 +28,7 @@ class Attendance_table(models.Model):
     stud_name = models.CharField(max_length=180, blank=True)
     sem_type = models.BooleanField(default=False)
     branch=models.CharField(max_length=250, null=True)
+    stud_div=models.CharField(max_length=1, blank=True)
     stud_profile=models.ImageField(upload_to="student", null=True)
     stud_email=models.EmailField(null=True)
     admission_year = models.PositiveIntegerField(
