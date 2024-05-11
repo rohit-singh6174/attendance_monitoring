@@ -1,0 +1,128 @@
+{% load static %}
+<html>
+    <head>
+        
+        <title>Online Attendance System - Fingerprint Based</title>
+        
+        <!-- Favicons -->
+        
+        <link href="{% static "img/teacher/iconlogo.png" %}" rel="icon">
+        {% block css_files %} 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+        <link rel="stylesheet" href="{% static "vendor/teacher/fontawesome/fontawesome-free-6.5.2-web/css/all.min.css" %}">
+        <link href="{% static "vendor/teacher/aos/aos.css" %}" rel="stylesheet">
+        
+        <link rel="stylesheet" href="{% static "css/teacher/style.css" %}"> 
+        
+        {% endblock%}
+      </head>
+
+    <body>
+        <section id="nav-bar">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                  <a class="navbar-brand text-white" href="#">MY CLASS</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#banner">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#about-us">Why us</a>
+                        
+                      <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Members</a>
+
+                        
+                      <li class="nav-item">
+                        <a class="nav-link" href="#contact-us">Contact Us</a>
+                      </li>
+
+                      <li class="nav-item" style="margin-left: 20px;">
+                        <a id="sign-in-btn" href="{% url "login" %}">Login</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+
+        </section>
+
+        {% block content%}
+
+        <!-- BANNER SECTION -->
+        <section id="banner">
+          {% include "teacher/includes/banner.html" %}
+        </section>
+
+         <!-- Services -->
+         <section id="services">
+          {% include "teacher/includes/services.html" %}
+        </section>
+
+        <!--About us-->
+        <section id="about-us">
+          {% include "teacher/includes/about-us.html" %}
+        </section>
+
+        <!-- Developers-->
+        <section id="testimonials">
+          {% include "teacher/includes/testimonials.html" %}
+        </section>
+
+        {% endblock%}
+
+        <!-- Footer-->
+        <footer id="contact-us"  data-aos="fade-down" data-aos-easing="ease" data-aos-delay="800">
+          <div class="row">
+            
+      
+            <div class="col-6 col-md-4 mb-3">
+              <h5>Developers</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Group Members</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Rohit Singh</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nikhil Shikare</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Rohan Shahabaje</a></li>
+                
+              </ul>
+            </div>
+      
+          
+      
+            <div class="col-md-5 offset-md-1 mb-3">
+             
+                <h5>BE Project</h5>
+                
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <p>This Website for Testing product for BE Project <br> Developed by Students from  Vidyalankar Institute of Technology <br> Mumbai </p>
+                </div>
+           
+            </div>
+          </div>
+      
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>© 2024 Rohit's, All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-body-emphasis" href="mailto:your.rohit224455@gmail.com"> <i class="fa-solid fa-envelope" style="width:24px; height:24px "></i></a></li>
+              <li class="ms-3"><a class="link-body-emphasis" href="https://www.linkedin.com/in/rohit-singh-771795240/"><i class="fa-brands fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </footer>
+
+        <!--JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/gsap@3.9.0/dist/gsap.min.js"></script>
+        <script src="{% static "vendor/teacher/aos/aos.js" %}"></script>
+        <script src="{% static "js/teacher/script.js" %}"></script>
+
+     </body>
+</html>

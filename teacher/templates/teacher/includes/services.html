@@ -1,46 +1,27 @@
 {% load static %}
-<div class="container" data-aos="fade-up">
+<!--Servies Content-->
+<div class="container text-center">
+    <h1 class="title" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="300" >WHAT WE DO ?</h1> 
+    <div class="row text-center">
+        <div class="col-md-4 services text-center aos" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="300"  style="transition: transform 0.8s ease;"  >
+            <img src="{% static "img/teacher/services/fingerprint-scanner-icon.png" %}" class="service-img">
+            <h4>Biometric Attendance</h4>
+            <p>Fingerprint Based Attendance System for Students. For that students Profile must be created as an Enrollement</p>
+        </div>
 
-    <div class="section-title">
-      <h2>Services</h2>
-      <p>
-        Our Attendance Management System leverages cutting-edge technology to streamline the process of tracking attendance in educational institutions. With features like biometric recognition, real-time data transmission, and seamless integration with existing systems, we offer a comprehensive solution for efficient attendance management. The system ensures accuracy, security, and ease of use, providing valuable insights for both educators and administrators
-      </p>
+        <div class="col-md-4 services text-center" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="400"  style="transition: transform 0.8s ease;" >
+            <img src="{% static "img/teacher/services/lecture.png" %}" class="service-img" >
+            <h4>Schedule Class</h4>
+            <p>Teachers can schedule classes for students to mark attendance. For that, the teacher has to create a session for the particular subject.</p>
+        </div>
+
+        <div class="col-md-4 services text-center" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="500"  style="transition: transform 0.8s ease;" >
+            <img src="{% static "img/teacher/services/reportgenrate.png" %}" class="service-img">
+            <h4>Report Generation</h4>
+            <p>Teachers can also generate attendance summaries for particular sessions via automatic report generation.</p>
+        </div>
     </div>
+    <button type="button" class="btn btn-primary" data-aos="fade-up" data-aos-easing="ease" data-aos-delay="500"   style="transition: transform 0.8s ease;" >All Services</button>
+</div>
 
-    <div class="row">
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bxl-dribbble"></i></div>
-          <h4><a href="">Biometric Attendance</a></h4>
-          <p>Fingerprint Based Attendance System for Students</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-file"></i></div>
-          <h4><a href="">Schedule</a></h4>
-          <p>Teachers can schedule the class for Students<p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-tachometer"></i></div>
-          <h4><a href="">Attendance Summary</a></h4>
-          <p>Teachers can Monitor Students Attendance</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-layer"></i></div>
-          <h4><a href="">Report Generation</a></h4>
-          <p>Automatic Report Generation</p>
-        </div>
-      </div>
-
-    </div>
-
-    </div>
+<!--Servies End Content-->
